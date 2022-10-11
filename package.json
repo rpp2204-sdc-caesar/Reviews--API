@@ -6,6 +6,10 @@
   "description": "SDC project",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "server-dev": "npx nodemon --watch server server/index.js",
+    "test": "jest --env=node"
+  },
   "dependencies": {
     "ansi-escapes": "^4.3.2",
     "ansi-regex": "^5.0.1",
@@ -18,6 +22,7 @@
     "babel-preset-current-node-syntax": "^1.0.1",
     "babel-preset-jest": "^29.0.2",
     "balanced-match": "^1.0.2",
+    "body-parser": "^1.20.1",
     "brace-expansion": "^1.1.11",
     "braces": "^3.0.2",
     "browserslist": "^4.21.4",
@@ -37,6 +42,7 @@
     "color-name": "^1.1.4",
     "concat-map": "^0.0.1",
     "convert-source-map": "^1.8.0",
+    "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.4",
     "dedent": "^0.7.0",
@@ -53,7 +59,8 @@
     "execa": "^5.1.1",
     "exit": "^0.1.2",
     "expect": "^29.0.3",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
+    "fast-csv": "^4.3.6",
     "fast-json-stable-stringify": "^2.1.0",
     "fb-watchman": "^2.0.2",
     "fill-range": "^7.0.1",
@@ -130,7 +137,7 @@
     "mimic-fn": "^2.1.0",
     "minimatch": "^3.1.2",
     "mongodb": "^4.10.0",
-    "mongoose": "^6.6.2",
+    "mongoose": "^6.6.5",
     "ms": "^2.1.2",
     "natural-compare": "^1.4.0",
     "node-int64": "^0.4.0",
@@ -198,9 +205,6 @@
     "yargs": "^17.5.1",
     "yargs-parser": "^21.1.1",
     "yocto-queue": "^0.1.0"
-  },
-  "scripts": {
-    "test": "jest --env=node"
   },
   "repository": {
     "type": "git",
