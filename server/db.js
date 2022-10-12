@@ -42,6 +42,7 @@ let getReviews = (product_id) => {
   return Review.find({product_id: product_id});
 };
 
+// TODO: Still working on the postReview
 let postReview = (product_id, rating, summary, body, recommend, name, email, photos, characteristics) => {
   let newReview = {
     product_id: product_id,
@@ -59,7 +60,6 @@ let postReview = (product_id, rating, summary, body, recommend, name, email, pho
 };
 
 
-// TODO: Meta data. still working on the database collection.
 const ratingsSchema = new mongoose.Schema({
   1: Number,
   2: Number,
@@ -69,17 +69,27 @@ const ratingsSchema = new mongoose.Schema({
 });
 
 const recommendedSchema = new mongoose.Schema({
-  true: Number,
-  false: Number
+  0: Number,
+  1: Number
 });
 
 const characteristicsSchema = new mongoose.Schema({
-  size: Number,
-  width: Number,
-  comfort: Number,
-  fit: Number,
-  length: Number,
-  quality: Number
+  Comfort: {
+    id: Number,
+    value: Number
+  },
+  Fit: {
+    id: Number,
+    value: Number
+  },
+  Length: {
+    id: Number,
+    value: Number
+  },
+  Quality: {
+    id: Number,
+    value: Number
+  }
 });
 
 const metaSchema = new mongoose.Schema({
@@ -89,20 +99,14 @@ const metaSchema = new mongoose.Schema({
   characteristics: characteristicsSchema
 });
 
-// let Meta = mongoose.model('Meta', metaSchema, "db collection name here");
+let Meta = mongoose.model('Meta', metaSchema, "MetaData");
 
+let getMetaData = (product_id) => {
+  return Meta.find({product_id: product_id});
+};
 
-// // var result = db.Reviews.aggregate([
-// //   {
-// //     $lookup: {
-// //           from: "Reviews_photos",
-// //           localField: "id",
-// //           foreignField: "review_id",
-// //           as: "photos"
-// //     }
-// //   },
-// // ]);
 module.exports = {
   getReviews,
-  postReview
+  postReview,
+  getMetaData
 };
