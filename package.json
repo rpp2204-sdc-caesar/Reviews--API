@@ -1,6 +1,10 @@
 {
   "devDependencies": {
-    "jest": "^29.0.3"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^29.2.0",
+    "superagent": "^8.0.2",
+    "supertest": "^6.3.0"
   },
   "name": "reviews--api",
   "description": "SDC project",
@@ -8,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "npx nodemon --watch server server/index.js",
-    "test": "jest --env=node"
+    "test": "jest  --env=node --runInBand --watch --coverage"
   },
   "dependencies": {
     "ansi-escapes": "^4.3.2",

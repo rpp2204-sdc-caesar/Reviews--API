@@ -35,29 +35,30 @@ const reviewsSchema = new mongoose.Schema({
   results: [resultsSchema]
 });
 
-// // then use this schema to create a model
+// then use this schema to create a model
 let Review = mongoose.model('Review', reviewsSchema, "NewReviews");
 
 let getReviews = (product_id) => {
-  return Review.find({product_id: product_id});
+  return Review.find({product_id: product_id}, {_id: 1, product_id:1, "results": { $slice: 5 }});
 };
 
 // TODO: Still working on the postReview
-let postReview = (product_id, rating, summary, body, recommend, name, email, photos, characteristics) => {
-  let newReview = {
-    product_id: product_id,
-    rating: rating,
-    summary: summary,
-    body: body,
-    recommend: recommend,
-    reviewer_name: name,
-    email: email,
-    photos: [],
-    characteristics: {}
-  };
-  console.log('reach to db.js postReview function');
-  return Review.create(newReview);
-};
+// let postReview = (product_id, rating, summary, body, recommend, name, email, photos, characteristics) => {
+//   let newReview = {
+//     product_id: product_id,
+//     rating: rating,
+//     summary: summary,
+//     body: body,
+//     recommend: recommend,
+//     reviewer_name: name,
+//     email: email,
+//     photos: [],
+//     characteristics: {}
+//   };
+//   console.log('reach to db.js postReview function');
+//   // maybe use update()?
+//   return Review.create(newReview);
+// };
 
 
 const ratingsSchema = new mongoose.Schema({
@@ -89,6 +90,14 @@ const characteristicsSchema = new mongoose.Schema({
   Quality: {
     id: Number,
     value: Number
+  },
+  Size: {
+    id: Number,
+    value: Number
+  },
+  Width: {
+    id: Number,
+    value: Number
   }
 });
 
@@ -107,6 +116,7 @@ let getMetaData = (product_id) => {
 
 module.exports = {
   getReviews,
-  postReview,
   getMetaData
 };
+
+// need to export postReview later
