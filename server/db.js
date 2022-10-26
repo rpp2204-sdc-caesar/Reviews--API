@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+// adding redis cache
+const redisClient = require('redis').createClient;
+const redis = redisClient(6379, 'localhost');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/SDC', {
@@ -10,6 +13,12 @@ mongoose.connect('mongodb://localhost:27017/SDC', {
     console.log('connected to mongodb');
   })
   .catch(err => console.log(err));
+
+
+// connect to redis
+redis.on("connect", () => {
+  console.log('connected to Redis');
+});
 
 // // Schema is a blueprint of data
 const photosSchema = new mongoose.Schema({
@@ -39,7 +48,9 @@ const reviewsSchema = new mongoose.Schema({
 let Review = mongoose.model('Review', reviewsSchema, "NewReviews");
 
 let getReviews = (product_id) => {
-  return Review.find({product_id: product_id}, {_id: 1, product_id:1, "results": { $slice: 5 }});
+  return Review.find({
+    product_id: product_id}, {_id: 1, product_id:1, "results": { $slice: 5 }
+  }).lean();
 };
 
 // TODO: Still working on the postReview
@@ -111,7 +122,9 @@ const metaSchema = new mongoose.Schema({
 let Meta = mongoose.model('Meta', metaSchema, "MetaData");
 
 let getMetaData = (product_id) => {
-  return Meta.find({product_id: product_id});
+  return Meta.find({
+    product_id: product_id
+  }).lean();
 };
 
 module.exports = {
