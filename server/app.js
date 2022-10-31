@@ -9,6 +9,9 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/loaderio-96b697994ddaf2624f8b13182a1d2544', (req, res) => {
+  res.send('loaderio-96b697994ddaf2624f8b13182a1d2544');
+});
 
 app.get('/reviews', (req, res) => {
   const { product_id } = req.query;
