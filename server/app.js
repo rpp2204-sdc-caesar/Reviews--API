@@ -34,17 +34,4 @@ app.get('/reviews/meta', (req, res) => {
     .catch(err => console.log(err));
 });
 
-// TODO: Still working on post review
-// app.post('/reviews', (req, res) => {
-//   const { product_id, rating, summary, body, recommend, name, email, photos, characteristics } = req.body;
-//   console.log('log req.body here', req.body);
-//   console.log('log req.body.rating here', req.body.rating);
-//   postReview(product_id, rating, summary, body, recommend, name, email, photos, characteristics)
-//     .then((response) => {
-//       console.log('log POST Reviews response here', response);
-//       res.send(response);
-//     })
-//     .catch(err => console.log(err));
-// });
-
 module.exports = app;
